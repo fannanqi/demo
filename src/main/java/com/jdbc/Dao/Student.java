@@ -7,8 +7,8 @@ public class Student {
     private Integer id;
     private String name;
     private String sex;
-    private double weight;
-    private double high;
+    private Double weight;
+    private Double high;
 
     public Integer getId() {
         return id;
@@ -34,19 +34,19 @@ public class Student {
         this.sex = sex;
     }
 
-    public double getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
-    public double getHigh() {
+    public Double getHigh() {
         return high;
     }
 
-    public void setHigh(double high) {
+    public void setHigh(Double high) {
         this.high = high;
     }
 

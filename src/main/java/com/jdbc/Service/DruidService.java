@@ -103,7 +103,7 @@ public class DruidService {
                 sql += "name = ?, ";
                 params.add(cur.get("name").toString());
             }
-            if (cur.containsKey("sex") && cur.get("sex") != null) {
+            if (cur.containsKey("sex") && !cur.get("sex").equals("")) {
                 sql += "sex = ?, ";
                 params.add(cur.get("sex").toString());
             }
@@ -151,7 +151,7 @@ public class DruidService {
             String sql = "UPDATE stu SET ";
             List<Object> params = new ArrayList<>();
 
-            if (cur.containsKey("sex") && cur.get("sex") != null) {
+            if (cur.containsKey("sex") && cur.get("sex").equals("")) {
                 sql += "sex = ?, ";
                 params.add(cur.get("sex").toString());
             }

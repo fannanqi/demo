@@ -19,7 +19,8 @@ public class SpringMvcConfig implements WebMvcConfigurer {
         interceptorRegistration.excludePathPatterns(
                 "/jdbc/login",
                 "/jdbc/regist",
-                "/*.html",
+                "/login.html",
+                "/regist.html",
                 "/js/**",
                 "/imgs/**",
                 "/element-ui/**"
