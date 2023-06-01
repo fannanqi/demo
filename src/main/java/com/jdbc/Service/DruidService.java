@@ -29,7 +29,7 @@ public class DruidService {
             conn= JDBCUtils_Druid.getConnection();
             conn.setAutoCommit(false);//开启事物
             String sql="insert into stu(id,name,sex,high,weight)" +
-                    "values(?,?,?,?,?,?)";
+                    "values(?,?,?,?,?)";
             pstmt=conn.prepareStatement(sql);
             pstmt.setInt(1,student.getId());
             pstmt.setString(2,student.getName());
@@ -67,6 +67,7 @@ public class DruidService {
         return students;
     }
     public Student selectById(String id){
+        System.out.println("id="+id);
         String sql="select * from stu where id=?";
         Student student = template.queryForObject(sql, new BeanPropertyRowMapper<Student>(Student.class), id);
         return student;
@@ -103,15 +104,15 @@ public class DruidService {
                 params.add(cur.get("name").toString());
             }
             if (cur.containsKey("sex") && cur.get("sex") != null) {
-                sql += "chinese = ?, ";
+                sql += "sex = ?, ";
                 params.add(cur.get("sex").toString());
             }
             if (cur.containsKey("high") && cur.get("high") != null) {
-                sql += "math = ?, ";
+                sql += "high = ?, ";
                 params.add(cur.get("high").toString());
             }
             if (cur.containsKey("weight") && cur.get("weight") != null) {
-                sql += "eng = ?, ";
+                sql += "weight = ?, ";
                 params.add(cur.get("weight").toString());
             }
             sql = sql.substring(0, sql.length() - 2);
@@ -151,15 +152,15 @@ public class DruidService {
             List<Object> params = new ArrayList<>();
 
             if (cur.containsKey("sex") && cur.get("sex") != null) {
-                sql += "chinese = ?, ";
+                sql += "sex = ?, ";
                 params.add(cur.get("sex").toString());
             }
             if (cur.containsKey("high") && cur.get("high") != null) {
-                sql += "math = ?, ";
+                sql += "high = ?, ";
                 params.add(cur.get("high").toString());
             }
             if (cur.containsKey("weight") && cur.get("weight") != null) {
-                sql += "eng = ?, ";
+                sql += "weight = ?, ";
                 params.add(cur.get("weight").toString());
             }
 

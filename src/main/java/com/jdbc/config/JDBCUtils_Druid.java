@@ -1,6 +1,8 @@
 package com.jdbc.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.alibaba.druid.util.JdbcUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -9,32 +11,30 @@ import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 @Configuration
-@ConfigurationProperties(prefix = "spring.datasource")
 public class JDBCUtils_Druid {
-    @Value("${spring.datasource.driver-class-name}")
-    private static String driverClassName;
-    @Value("${spring.datasource.url}")
-    private static String url;
-    @Value("${spring.datasource.username}")
-    private static String username;
-    @Value("${spring.datasource.password}")
-    private static String password;;
     private static DataSource dataSource;
-
-    @Bean
-    public static void druidDataSource(){
-        DruidDataSource dataSource1 = new DruidDataSource();
-        dataSource1.setUrl(url);
-        dataSource1.setUsername(username);
-        dataSource1.setPassword(password);
-        dataSource1.setDriverClassName(driverClassName);
-        dataSource=dataSource1;
+    static {
+        Properties pro=new Properties();
+        InputStream resourceAsStream = JdbcUtils.class.getClassLoader().getResourceAsStream("druid.properties");
+        try {
+            pro.load(resourceAsStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            dataSource= DruidDataSourceFactory.createDataSource(pro);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
@@ -65,4 +65,5 @@ public class JDBCUtils_Druid {
             }
         }
     }
+
 }

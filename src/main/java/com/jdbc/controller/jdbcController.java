@@ -98,6 +98,7 @@ public class jdbcController {
     }
     @RequestMapping("/updateByIdServlet")
     public String updateByIdServlet(@RequestBody Student student){
+        System.out.println(student.toString());
         Map<String,Object> cur=new HashMap<>();
         int update=0;
         cur.put("name",student.getName());
