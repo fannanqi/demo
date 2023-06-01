@@ -1,0 +1,10 @@
+spring:
+  rsocket:
+    server:
+      port: 8080
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/students?useSSL=false
+    username: root
+    password: 77777777
+    type: com.alibaba.druid.pool.DruidDataSource
