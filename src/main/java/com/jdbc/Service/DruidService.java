@@ -151,7 +151,7 @@ public class DruidService {
             String sql = "UPDATE stu SET ";
             List<Object> params = new ArrayList<>();
 
-            if (cur.containsKey("sex") && cur.get("sex").equals("")) {
+            if (cur.containsKey("sex") && !cur.get("sex").equals("")) {
                 sql += "sex = ?, ";
                 params.add(cur.get("sex").toString());
             }
